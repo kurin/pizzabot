@@ -1,0 +1,21 @@
+version: '2'
+services:
+    foodbrowser:
+        image: foodbrowser
+        build:
+            context: './src/foodbrowser'
+            dockerfile: Dockerfile
+        dns:
+            - 0.0.0.0
+        ports:
+            - "6789:6789"
+        volumes:
+            - ./src/foodbrowser/package.json:/usr/src/app/package.json
+            - ./src/foodbrowser/index.html:/usr/src/app/index.html
+            - ./src/foodbrowser/.eslintrc:/usr/src/app/.eslintrc
+            - ./src/foodbrowser/webpack.config.js:/usr/src/app/webpack.config.js
+            - ./src/foodbrowser/webpack.prod.config.js:/usr/src/app/webpack.prod.config.js
+            - ./src/foodbrowser/static:/usr/src/app/static
+            - ./src/foodbrowser/src:/usr/src/app/src
+        command:
+            npm start
